@@ -1,0 +1,32 @@
+<form novalidate (ngSubmit)="signUp()" [formGroup]="signUpForm">
+  <div class="row">
+    <div class="form-group col-md-12 col-md-offset-2">
+      <input type="input" id="FirstNameId" class="form-control" formControlName="fullName" placeholder="FullName" autocomplete="off" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-12 col-md-offset-2">
+      <input type="input"  class="form-control" formControlName="photoUrl" placeholder="PhotoUrl" autocomplete="off"/>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-12 col-md-offset-2">
+      <input type="input" id="EmailIdSignUp" class="form-control" formControlName="email" placeholder="Email address" autocomplete="off"/>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-12 col-md-offset-2">
+      <input type="password" id="PasswordIdSignUp" class="form-control" formControlName="password"
+        placeholder="Password" autocomplete="off"/>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-12 col-md-offset-2">
+      <input type="submit" class="form-control btn btn-success" value="Create" />
+    </div>
+  </div>
+</form>

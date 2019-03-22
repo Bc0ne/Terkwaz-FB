@@ -1,0 +1,87 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="border border-success">
+        <h1>New Blogs</h1>
+        <hr>
+        <div *ngFor="let item of blogsNotification">
+          <div class="alert alert-success">
+            @author: <strong>{{item.authorName}}</strong> has publish <strong>{{item.blogTitle}}</strong> blog
+          </div>
+          <hr>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <input type="button" class="btn btn-success" (click)="openModal(template)" value="New Blog">
+      <h1> Blogs</h1>
+      <hr>
+      <div *ngFor="let blog of blogs">
+        <div class="row">
+          <div class="col-md-3">
+            <img [src]="blog.author.PhotoUrl" width="20px" height="20px"> @author
+            <strong>{{blog.author.fullName}}</strong>
+          </div>
+          <div class="col-md-9">
+            <strong>{{blog.title}}</strong>
+            <br>
+            <span>{{blog.subtitle}}</span> - <span>{{blog.creationDate | timeAgo}}</span>
+            <hr>
+            <img [src]="blog.photoUrl" width="500px" height="250px">
+            <hr>
+            <p>{{blog.body}}</p>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- New Blog -->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-center">New Blog</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="addNewBlog()" #blogForm="ngForm">
+      <div class="row">
+        <div class="form-group col-md-12 col-md-offset-2">
+          <input type="text" class="form-control" placeholder="Blog Title"
+          [(ngModel)]="newBlog.title" name="title" required />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-12 col-md-offset-2">
+          <input type="text" class="form-control" placeholder="Blog Subtitle"
+          [(ngModel)]="newBlog.subtitle" name="subtitle" required />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-12 col-md-offset-2">
+          <input type="text" class="form-control" placeholder="Blog Photo Url"
+          [(ngModel)]="newBlog.photoUrl" name="photoUrl" required />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-12 col-md-offset-2">
+          <textarea class="form-control" placeholder="type your body here..."
+          [(ngModel)]="newBlog.body" name="body" required>
+            </textarea>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-12 col-md-offset-2">
+          <input type="submit" value="Create" class="form-control btn btn-success" [disabled]="!blogForm.valid">
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

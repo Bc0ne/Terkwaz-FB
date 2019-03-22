@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-6 col-md-offset-2">
+      <h1>Welcome to Terkwaz</h1>
+      <br>
+      <input type="button" class="btn btn-success" (click)="openModal(template)" value="Login to Dashboard">
+      <ng-template #template>
+        <div class="modal-header">
+          <h4 class="modal-title pull-center">Login</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <app-sign-in (onLoginSucceed)="closeModal()"></app-sign-in>
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <input type="button" class="btn btn-success" value="Create new account" (click)="createNewAccount()">
+            </div>
+          </div>
+          <div *ngIf="newAccount">
+            <hr>
+            <app-sign-up (onSignUpSucceed)="closeModal()"></app-sign-up>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
