@@ -1,6 +1,6 @@
 export class BlogInputModel {
     title: string;
     subtitle: string;
-    photoUrl: string;
+    imageUrl: string;
     body: string;
 }

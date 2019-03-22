@@ -1,32 +1,66 @@
 <form novalidate (ngSubmit)="signUp()" [formGroup]="signUpForm">
+  <div *ngIf="errorMessage" class="row">
+    <div class="col-md-12">
+      <span class="alert alert-danger">{{errorMessage}}</span>
+    </div>
+    <hr>
+    <br>
+  </div>
+
   <div class="row">
     <div class="form-group col-md-12 col-md-offset-2">
-      <input type="input" id="FirstNameId" class="form-control" formControlName="fullName" placeholder="FullName" autocomplete="off" />
+      <input type="input" id="FirstNameId" class="form-control" formControlName="fullName" placeholder="FullName"
+        autocomplete="off" />
+      <div *ngIf="signUpForm.get('fullName').errors?.required && signUpForm.get('fullName').touched">
+        <br>
+        <span class="alert alert-danger">
+          FullName is required.
+        </span>
+      </div>
     </div>
   </div>
 
   <div class="row">
     <div class="form-group col-md-12 col-md-offset-2">
-      <input type="input"  class="form-control" formControlName="photoUrl" placeholder="PhotoUrl" autocomplete="off"/>
+      <input type="input" class="form-control" formControlName="photoUrl" placeholder="PhotoUrl" autocomplete="off" />
+      <div *ngIf="signUpForm.get('photoUrl').errors?.required && signUpForm.get('photoUrl').touched">
+        <br>
+        <span class="alert alert-danger">
+          Photo Url is required.
+        </span>
+      </div>
     </div>
   </div>
 
   <div class="row">
     <div class="form-group col-md-12 col-md-offset-2">
-      <input type="input" id="EmailIdSignUp" class="form-control" formControlName="email" placeholder="Email address" autocomplete="off"/>
+      <input type="input" id="EmailIdSignUp" class="form-control" formControlName="email" placeholder="Email address"
+        autocomplete="off" />
+      <div *ngIf="signUpForm.get('email').errors?.required && signUpForm.get('email').touched">
+        <br>
+        <span class="alert alert-danger">
+          Email is required.
+        </span>
+      </div>
     </div>
   </div>
 
   <div class="row">
     <div class="form-group col-md-12 col-md-offset-2">
       <input type="password" id="PasswordIdSignUp" class="form-control" formControlName="password"
-        placeholder="Password" autocomplete="off"/>
+        placeholder="Password" autocomplete="off" />
+      <div *ngIf="signUpForm.get('password').errors?.required && signUpForm.get('password').touched">
+        <br>
+        <span class="alert alert-danger">
+          Password is required.
+        </span>
+      </div>
     </div>
   </div>
 
   <div class="row">
     <div class="form-group col-md-12 col-md-offset-2">
-      <input type="submit" class="form-control btn btn-success" value="Create" />
+      <input type="submit" class="form-control btn btn-success" value="Create" [disabled]="!(signUpForm.valid)" />
     </div>
   </div>
 </form>

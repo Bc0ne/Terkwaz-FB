@@ -16,8 +16,8 @@ export class SignInComponent implements OnInit {
 
   loginForm: FormGroup;
   login: LoginModel = new LoginModel();
-
   errorMessage: string;
+
   @Output() onLoginSucceed = new EventEmitter();
 
   constructor(private fb: FormBuilder, private router: Router, private userService: UserService) { }
@@ -49,14 +49,12 @@ export class SignInComponent implements OnInit {
   }
 
   onLoginSuccess(user): void {
-    console.log(user);
     this.userService.user.fullName = user.fullName;
     this.userService.user.email = user.email;
     this.userService.user.photoUrl = user.photoUrl;
-    console.log(user.token);
     localStorage.setItem(TokenValues.Token, JSON.stringify(user.token));
     localStorage.setItem(TokenValues.UserId, JSON.stringify(user.userId));
-    //this.onLoginSucceed.emit(null);
+    this.onLoginSucceed.emit(null);
     this.router.navigate(['/home']);
   }
 }

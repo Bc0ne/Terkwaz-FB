@@ -12,8 +12,8 @@ import { TokenValues } from '../_models/token-values';
 export class UserService {
 
   user: User;
-  private baseUrl = "http://mahmoudslama-001-site1.dtempurl.com/api/Identity/";
-  private developmentUrl = "https://localhost:44371/api/Identity";
+  private baseUrl = "http://mahmoudslama-001-site3.dtempurl.com/api/Identity/";
+  private developmentUrl = this.baseUrl;//"https://localhost:44371/api/Identity";
 
   constructor(private http: HttpClient) { }
 
@@ -30,12 +30,14 @@ export class UserService {
   }
 
   getUserById(userId: number) {
+    const token = JSON.parse(localStorage.getItem(TokenValues.Token));
     const headers = new HttpHeaders(
       {
-        'Content-Type': 'application/json',
-        'Authorization': "Bearer " + JSON.parse(localStorage.getItem(TokenValues.Token))
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token
       });
-    return this.http.get(`this.developmentUrl/${userId}`, { headers: headers });
+
+    return this.http.get(`${this.developmentUrl}/${userId}`, { headers: headers });
   }
 
   updateUserById(user) {
@@ -45,5 +47,20 @@ export class UserService {
         'Authorization': "Bearer " + JSON.parse(localStorage.getItem(TokenValues.Token))
       });
     return this.http.patch(this.developmentUrl, user, { headers: headers });
+  }
+
+  isLoggedIn() {
+    let token = JSON.parse(localStorage.getItem(TokenValues.Token));
+    let userId = JSON.parse(localStorage.getItem(TokenValues.UserId));
+
+    if ((token == null || token == undefined) && (userId == null || userId == undefined)) {
+      return false;
+    }
+    return true;
+  }
+
+  logOut() {
+    console.log("logOut");
+    localStorage.clear();
   }
 }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { SignUpModel } from '../../_models/signUp.model';
 import { UserService } from '../../_services/user-service.service';
+import { TokenValues } from 'src/app/_models/token-values';
 
 @Component({
   selector: 'app-sign-up',
@@ -42,9 +43,12 @@ export class SignUpComponent implements OnInit {
   }
 
   onSuccess(user){
-    console.log("Created");
+    this.userService.user.fullName = user.fullName;
+    this.userService.user.email = user.email;
+    this.userService.user.photoUrl = user.photoUrl;
+    localStorage.setItem(TokenValues.Token, JSON.stringify(user.token));
+    localStorage.setItem(TokenValues.UserId, JSON.stringify(user.userId));
     this.onSignUpSucceed.emit(null);
-    console.log(user);
     this.router.navigate(['/home']);
   }
 
